@@ -67,6 +67,18 @@ io.on('connection', (socket) => {
     }
 
     socket.on('clientInit', (id) => { // Init client
+        if (id.length !== 64) {
+            console.warn("Invalid id length.");
+            socket.disconnect(true);
+            return;
+        }
+
+        if (eventEmitter.listeners(id).length > 0) {
+            console.warn("Same id already exists");
+            socket.disconnect(true);
+            return;
+        }
+        
         addressId = id;
 
         console.info(`${ipAddress} registered ${id}`);
