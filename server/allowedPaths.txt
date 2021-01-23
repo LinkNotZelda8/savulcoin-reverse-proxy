@@ -1,0 +1,14 @@
+blockchain/blocks
+blockchain/blocks/*
+blockchain/blocks/latest
+blockchain/blocks/transactions/*
+blockchain/transactions
+blockchain/transactions/unspent
+operator/wallets
+operator/wallets/*
+operator/wallets/*/addresses
+operator/wallets/*/transactions
+operator/*/balance
+node/peers
+node/heartbeat
+node/transactions/*/confirmations
