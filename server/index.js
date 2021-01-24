@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
             id: id
         };
 
-        if (request.method === 'POST') {
+        if (request.method === 'POST' || request.method === 'PUT') {
             data = { ...data,
                 body: request.body
             };    
