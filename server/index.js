@@ -29,6 +29,10 @@ var eventEmitter = new EventEmitter();
 
 io.on('connection', (socket) => {
     var ipAddress = socket.request.connection.remoteAddress;
+    
+    if (socket.handshake.headers.hasOwnProperty("x-forwarded-for")) {
+        ipAddress = socket.handshake.headers["x-forwarded-for"].split(",")[0];
+    }
 
     console.log('New connection from '+ipAddress);
 
