@@ -19,7 +19,7 @@ require('./console')('1', 6);
 
 socket.on('connect', () => {
     socket.emit('clientInit', ADDRESS_ID);
-    console.log('Connected to server!')
+    console.info('Connected to server!')
 })
 
 socket.on('request', (request) => {
@@ -67,3 +67,7 @@ socket.on('request', (request) => {
             });  
         });
 })
+
+setInterval(function() {
+    console.info("Keep alive.");
+}, 1000 * 60 * 60);
