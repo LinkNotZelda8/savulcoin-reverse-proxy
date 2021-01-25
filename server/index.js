@@ -1,6 +1,7 @@
 const EventEmitter = require('events').EventEmitter;
 
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
@@ -101,9 +102,20 @@ io.on('connection', (socket) => {
     });
 });
 
+
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+);
+
+app.use(express.json());
+
 app.all('/:addressId([a-zA-Z0-9]{64})/:path(*)', (req, res) => {
     if (shouldAllowPath(req.params.path)) {
-        eventEmitter.emit(req.params.addressId, new Request(res, req.params.path, req.params.addressId, req.method, req.body, req.ip));
+        eventEmitter.emit(req.params.addressId, 
+            new Request(res, req.params.path, req.params.addressId, req.method, req.body, req.ip)
+        );
     } else {
         res.status(404).send("Not found");
         console.info(`${req.ip} /${req.params.path} path not allowed.`)

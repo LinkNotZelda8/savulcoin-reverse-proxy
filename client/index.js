@@ -35,6 +35,8 @@ socket.on('request', (request) => {
     let sa = null;
     if (request.method === 'POST') {
         sa = superagent.post(URL).send(request.body);
+    } else if (request.method === 'PUT') {
+        sa = superagent.put(URL).send(request.body);
     } else {
         sa = superagent.get(URL);
     }
